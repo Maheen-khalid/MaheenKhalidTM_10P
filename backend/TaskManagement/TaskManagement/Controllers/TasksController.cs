@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using TaskManagement.DTOs;
 
 [ApiController]
 [Route("api/[controller]")]
-[Authorize]
 public class TasksController : ControllerBase
 {
     private readonly AppDbContext _context;
@@ -16,42 +16,61 @@ public class TasksController : ControllerBase
     }
 
     private int GetUserId() => int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
-    private bool IsAdmin() => bool.Parse(User.FindFirstValue("IsAdmin")!);
+    private bool IsAdmin() => User.IsInRole("Admin");
+
+    [HttpGet("{id}")]
+    [Authorize]
+    public async Task<IActionResult> GetTask(int id)
+    {
+        var task = await _context.Tasks.FindAsync(id);
+        if (task == null)
+            return NotFound("Task not found");
+
+        if (!IsAdmin() && task.UserId != GetUserId())
+            return Forbid();
+
+        return Ok(task);
+    }
 
     [HttpGet]
-    public IActionResult GetTasks()
+    [Authorize]
+    public async Task<IActionResult> GetTasks()
     {
         var userId = GetUserId();
+
         var tasks = IsAdmin()
-            ? _context.Tasks.ToList()
-            : _context.Tasks.Where(t => t.UserId == userId).ToList();
+            ? await _context.Tasks.ToListAsync()
+            : await _context.Tasks.Where(t => t.UserId == userId).ToListAsync();
 
         return Ok(tasks);
     }
 
     [HttpPost]
-    public IActionResult Create(TaskDto dto)
+    [Authorize]
+    public async Task<IActionResult> Create(TaskDto dto)
     {
         var task = new TaskItem
         {
             Title = dto.Title,
             Description = dto.Description,
-            DueDate = dto.DueDate,
             Status = dto.Status,
+            DueDate = dto.DueDate,
             UserId = GetUserId()
         };
 
         _context.Tasks.Add(task);
-        _context.SaveChanges();
+        await _context.SaveChangesAsync();
 
         return Ok(task);
     }
 
     [HttpPut("{id}")]
-    public IActionResult Update(int id, TaskDto dto)
+    [Authorize]
+    public async Task<IActionResult> Update(int id, TaskDto dto)
     {
-        var task = _context.Tasks.Find(id);
-        if (task == null) return NotFound();
+        var task = await _context.Tasks.FindAsync(id);
+        if (task == null)
+            return NotFound("Task not found");
 
         if (!IsAdmin() && task.UserId != GetUserId())
             return Forbid();
@@ -61,21 +80,23 @@ public class TasksController : ControllerBase
         task.Status = dto.Status;
         task.DueDate = dto.DueDate;
 
-        _context.SaveChanges();
+        await _context.SaveChangesAsync();
         return Ok(task);
     }
 
     [HttpDelete("{id}")]
-    public IActionResult Delete(int id)
+    [Authorize]
+    public async Task<IActionResult> Delete(int id)
     {
-        var task = _context.Tasks.Find(id);
-        if (task == null) return NotFound();
+        var task = await _context.Tasks.FindAsync(id);
+        if (task == null)
+            return NotFound("Task not found");
 
         if (!IsAdmin() && task.UserId != GetUserId())
             return Forbid();
 
         _context.Tasks.Remove(task);
-        _context.SaveChanges();
-        return Ok("Deleted");
+        await _context.SaveChangesAsync();
+        return Ok("Deleted successfully");
     }
 }

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using TaskManagement.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -54,7 +55,7 @@ app.UseSwaggerUI();
 
 app.UseAuthentication();
 app.UseAuthorization();
-
+app.UseMiddleware<ExceptionMiddleware>();
 app.MapControllers();
 
 app.Run();

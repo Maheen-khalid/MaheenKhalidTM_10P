@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import {
@@ -7,6 +5,7 @@ import {
 } from "react-icons/fi";
 import { MdEdit, MdDelete } from "react-icons/md";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 interface Task {
   id?: number;
@@ -27,21 +26,47 @@ const Sidebar = ({ collapsed, activeItem, setActiveItem }: any) => (
   </aside>
 );
 
-const Topbar = ({ toggleTheme, darkMode, toggleSidebar }: any) => (
-  <header className="flex justify-between items-center bg-white dark:bg-gray-800 p-4 border-b dark:border-gray-600">
-    <div className="flex items-center gap-4">
-      <button className="text-xl" onClick={toggleSidebar}><FiMenu /></button>
-      <h1 className="text-xl font-semibold text-gray-800 dark:text-white">Task Management Dashboard</h1>
-    </div>
-    <div className="flex items-center gap-4">
-      <button><FiBell className="text-gray-600 dark:text-gray-300" /></button>
-      <button onClick={toggleTheme}>{darkMode ? <FiSun className="text-white" /> : <FiMoon />}</button>
-      <div className="flex items-center gap-2 text-gray-700 dark:text-gray-200">
-        <FiUser /> <span>Maheen</span>
+const Topbar = ({ toggleTheme, darkMode, toggleSidebar }: any) => {
+  const navigate = useNavigate();
+  const [userName, setUserName] = useState("User");
+  const [userRole, setUserRole] = useState("User");
+
+  useEffect(() => {
+    const storedName = localStorage.getItem("userName");
+    const storedRole = localStorage.getItem("userRole");
+    if (storedName) setUserName(storedName);
+    if (storedRole) setUserRole(storedRole);
+  }, []);
+
+  const handleSignOut = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("userName");
+    localStorage.removeItem("userRole");
+    navigate("/login");
+  };
+
+  return (
+    <header className="flex justify-between items-center bg-white dark:bg-gray-800 p-4 border-b dark:border-gray-600">
+      <div className="flex items-center gap-4">
+        <button className="text-xl" onClick={toggleSidebar}><FiMenu /></button>
+        <h1 className="text-xl font-semibold text-gray-800 dark:text-white">Task Management Dashboard</h1>
       </div>
-    </div>
-  </header>
-);
+      <div className="flex items-center gap-4">
+        <button><FiBell className="text-gray-600 dark:text-gray-300" /></button>
+        <button onClick={toggleTheme}>{darkMode ? <FiSun className="text-white" /> : <FiMoon />}</button>
+        <div className="flex items-center gap-2 text-gray-700 dark:text-gray-200">
+          <FiUser /> <span>{userName} ({userRole})</span>
+        </div>
+        <button
+          onClick={handleSignOut}
+          className="text-sm bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded transition"
+        >
+          Sign Out
+        </button>
+      </div>
+    </header>
+  );
+};
 
 const StatsBar = ({ stats }: any) => (
   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 p-4">

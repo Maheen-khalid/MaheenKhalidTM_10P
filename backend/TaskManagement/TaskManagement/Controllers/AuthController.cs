@@ -26,9 +26,10 @@ public class AuthController : ControllerBase
 
         var user = new User
         {
+            Username = dto.Username,
             Email = dto.Email,
             PasswordHash = BCrypt.Net.BCrypt.HashPassword(dto.Password),
-            IsAdmin = false
+            IsAdmin = false // or make it configurable
         };
 
         _context.Users.Add(user);
@@ -44,23 +45,35 @@ public class AuthController : ControllerBase
         if (user == null || !BCrypt.Net.BCrypt.Verify(dto.Password, user.PasswordHash))
             return Unauthorized("Invalid credentials");
 
+        // Determine role
+        string role = user.IsAdmin ? "Admin" : "User";
+
         var claims = new[]
         {
             new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-            new Claim("IsAdmin", user.IsAdmin.ToString())
+            new Claim(ClaimTypes.Email, user.Email),
+            new Claim(ClaimTypes.Name, user.Username),
+            new Claim(ClaimTypes.Role, role) // ✅ standard role claim
         };
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]!));
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
         var token = new JwtSecurityToken(
+            issuer: _config["Jwt:Issuer"],
+            audience: _config["Jwt:Audience"],
             claims: claims,
             expires: DateTime.Now.AddHours(1),
-            signingCredentials: creds);
+            signingCredentials: creds
+        );
+
+        var jwt = new JwtSecurityTokenHandler().WriteToken(token);
 
         return Ok(new
         {
-            token = new JwtSecurityTokenHandler().WriteToken(token)
+            token = jwt,
+            role = role,
+            username = user.Username // or `user.Name` if you have that column
         });
     }
 }
