@@ -44,7 +44,10 @@ builder.Services.AddDbContext<AppDbContext>(options =>
         ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnection"))
     )
 );
-
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("Admin", policy => policy.RequireRole("Admin"));
+});
 var app = builder.Build();
 
 // ✅ Use CORS middleware BEFORE any auth or endpoints
