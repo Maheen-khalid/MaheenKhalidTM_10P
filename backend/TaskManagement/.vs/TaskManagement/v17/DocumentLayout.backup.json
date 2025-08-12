@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\Maheen Khalid\\Desktop\\10 pearls\\MaheenKhalidTM_10P\\backend\\TaskManagement\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{0BCAF10E-4438-4E65-88D7-B7793394EFEB}|TaskManagement\\TaskManagement.csproj|c:\\users\\maheen khalid\\desktop\\10 pearls\\maheenkhalidtm_10p\\backend\\taskmanagement\\taskmanagement\\controllers\\taskscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0BCAF10E-4438-4E65-88D7-B7793394EFEB}|TaskManagement\\TaskManagement.csproj|solutionrelative:taskmanagement\\controllers\\taskscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{0BCAF10E-4438-4E65-88D7-B7793394EFEB}|TaskManagement\\TaskManagement.csproj|c:\\users\\maheen khalid\\desktop\\10 pearls\\maheenkhalidtm_10p\\backend\\taskmanagement\\taskmanagement\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0BCAF10E-4438-4E65-88D7-B7793394EFEB}|TaskManagement\\TaskManagement.csproj|solutionrelative:taskmanagement\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -13,10 +17,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{0BCAF10E-4438-4E65-88D7-B7793394EFEB}|TaskManagement\\TaskManagement.csproj|c:\\users\\maheen khalid\\desktop\\10 pearls\\maheenkhalidtm_10p\\backend\\taskmanagement\\taskmanagement\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0BCAF10E-4438-4E65-88D7-B7793394EFEB}|TaskManagement\\TaskManagement.csproj|solutionrelative:taskmanagement\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0BCAF10E-4438-4E65-88D7-B7793394EFEB}|TaskManagement\\TaskManagement.csproj|c:\\users\\maheen khalid\\desktop\\10 pearls\\maheenkhalidtm_10p\\backend\\taskmanagement\\taskmanagement\\controllers\\taskscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0BCAF10E-4438-4E65-88D7-B7793394EFEB}|TaskManagement\\TaskManagement.csproj|solutionrelative:taskmanagement\\controllers\\taskscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{0BCAF10E-4438-4E65-88D7-B7793394EFEB}|TaskManagement\\TaskManagement.csproj|c:\\users\\maheen khalid\\desktop\\10 pearls\\maheenkhalidtm_10p\\backend\\taskmanagement\\taskmanagement\\dtos\\registerdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -62,7 +62,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
@@ -102,15 +102,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "TasksController.cs",
               "DocumentMoniker": "C:\\Users\\Maheen Khalid\\Desktop\\10 pearls\\MaheenKhalidTM_10P\\backend\\TaskManagement\\TaskManagement\\Controllers\\TasksController.cs",
               "RelativeDocumentMoniker": "TaskManagement\\Controllers\\TasksController.cs",
               "ToolTip": "C:\\Users\\Maheen Khalid\\Desktop\\10 pearls\\MaheenKhalidTM_10P\\backend\\TaskManagement\\TaskManagement\\Controllers\\TasksController.cs",
               "RelativeToolTip": "TaskManagement\\Controllers\\TasksController.cs",
-              "ViewState": "AgIAAE0AAAAAAAAAAAAUwHIAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-10T20:53:19.086Z"
+              "WhenOpened": "2025-07-10T20:53:19.086Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -150,20 +151,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "AuthController.cs",
               "DocumentMoniker": "C:\\Users\\Maheen Khalid\\Desktop\\10 pearls\\MaheenKhalidTM_10P\\backend\\TaskManagement\\TaskManagement\\Controllers\\AuthController.cs",
               "RelativeDocumentMoniker": "TaskManagement\\Controllers\\AuthController.cs",
-              "ToolTip": "C:\\Users\\Maheen Khalid\\Desktop\\10 pearls\\MaheenKhalidTM_10P\\backend\\TaskManagement\\TaskManagement\\Controllers\\AuthController.cs*",
-              "RelativeToolTip": "TaskManagement\\Controllers\\AuthController.cs*",
-              "ViewState": "AgIAAF8AAAAAAAAAAAAUwGkAAAAYAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\Maheen Khalid\\Desktop\\10 pearls\\MaheenKhalidTM_10P\\backend\\TaskManagement\\TaskManagement\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "TaskManagement\\Controllers\\AuthController.cs",
+              "ViewState": "AgIAAFEAAAAAAAAAAADwv2gAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-10T20:09:17.315Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-10T20:09:17.315Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Maheen Khalid\\Desktop\\10 pearls\\MaheenKhalidTM_10P\\backend\\TaskManagement\\TaskManagement\\Program.cs",
               "RelativeDocumentMoniker": "TaskManagement\\Program.cs",
@@ -171,8 +171,7 @@
               "RelativeToolTip": "TaskManagement\\Program.cs",
               "ViewState": "AgIAABMAAAAAAAAAAAAswDEAAAADAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-10T19:59:54.233Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-10T19:59:54.233Z"
             },
             {
               "$type": "Document",
@@ -188,7 +187,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "AppDbContext.cs",
               "DocumentMoniker": "C:\\Users\\Maheen Khalid\\Desktop\\10 pearls\\MaheenKhalidTM_10P\\backend\\TaskManagement\\TaskManagement\\Data\\AppDbContext.cs",
               "RelativeDocumentMoniker": "TaskManagement\\Data\\AppDbContext.cs",
@@ -196,8 +195,7 @@
               "RelativeToolTip": "TaskManagement\\Data\\AppDbContext.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-10T19:51:48.341Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-10T19:51:48.341Z"
             },
             {
               "$type": "Document",

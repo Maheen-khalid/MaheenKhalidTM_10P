@@ -10,7 +10,9 @@ const Sidebar = ({ collapsed, activeItem, setActiveItem }: any) => (
     <h2 className="text-2xl font-bold mb-10">{!collapsed && "Tasky"}</h2>
     <ul className="space-y-4">
       <li className={`flex items-center gap-3 cursor-pointer p-2 rounded hover:bg-gray-700 ${activeItem === "dashboard" ? "bg-gray-700" : ""}`} onClick={() => setActiveItem("dashboard")}> <FiGrid /> {!collapsed && "Dashboard"}</li>
-      <li className={`flex items-center gap-3 cursor-pointer p-2 rounded hover:bg-gray-700 ${activeItem === "users" ? "bg-gray-700" : ""}`} onClick={() => setActiveItem("users")}> <FiUsers /> {!collapsed && "Users"}</li>
+      <li className={`flex items-center gap-3 cursor-pointer p-2 rounded hover:bg-gray-700 ${activeItem === "users" ? "bg-gray-700" : ""}`} onClick={() => setActiveItem("users")
+        
+      }> <FiUsers /> {!collapsed && "Users"}</li>
       <li className={`flex items-center gap-3 cursor-pointer p-2 rounded hover:bg-gray-700 ${activeItem === "settings" ? "bg-gray-700" : ""}`} onClick={() => setActiveItem("settings")}> <FiSettings /> {!collapsed && "Settings"}</li>
     </ul>
   </aside>
@@ -58,7 +60,7 @@ const Topbar = ({ toggleTheme, darkMode, toggleSidebar }: any) => {
   );
 };
 
-const AdminDashboard = () => {
+const AllUsers = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [activeItem, setActiveItem] = useState("dashboard");
@@ -66,7 +68,6 @@ const AdminDashboard = () => {
   const [tasks, setTasks] = useState<any[]>([]);
   const [expandedUserId, setExpandedUserId] = useState<number | null>(null);
   const [modalTask, setModalTask] = useState<any | null>(null);
-  const [confirmModal, setConfirmModal] = useState<{ type: "task" | "user"; id: number } | null>(null);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -96,25 +97,12 @@ const AdminDashboard = () => {
     }
   }, [darkMode]);
 
-  const handleDeleteUser = async (userId: number) => {
-    try {
-      await axios.delete(`https://localhost:7088/api/Auth/delete-user/${userId}`, {
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
-      });
-      setUsers(users.filter((u) => u.id !== userId));
-      setConfirmModal(null);
-    } catch (err) {
-      console.error("User deletion failed", err);
-    }
-  };
-
-  const handleDeleteTaskConfirmed = async (taskId: number) => {
+  const handleDelete = async (taskId: number) => {
     try {
       await axios.delete(`https://localhost:7088/api/tasks/${taskId}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
       });
       setTasks(tasks.filter((t) => t.id !== taskId));
-      setConfirmModal(null);
     } catch (err) {
       console.error("Delete failed", err);
     }
@@ -147,7 +135,6 @@ const AdminDashboard = () => {
                 <tr>
                   <th className="px-6 py-3 text-left text-sm font-semibold">Username</th>
                   <th className="px-6 py-3 text-left text-sm font-semibold">Email</th>
-                  <th className="px-6 py-3 text-left text-sm font-semibold">Actions</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
@@ -158,20 +145,7 @@ const AdminDashboard = () => {
                       <tr className="hover:bg-gray-50 dark:hover:bg-gray-700 transition">
                         <td className="px-6 py-4 text-sm">{user.username}</td>
                         <td className="px-6 py-4 text-sm">{user.email}</td>
-                        <td className="px-6 py-4 flex gap-4">
-                          <button
-                            className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 text-sm underline"
-                            onClick={() => setExpandedUserId(expandedUserId === user.id ? null : user.id)}
-                          >
-                            {expandedUserId === user.id ? "Hide Tasks" : "View Tasks"}
-                          </button>
-                          <button
-                            className="text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300 text-sm underline"
-                            onClick={() => setConfirmModal({ type: "user", id: user.id })}
-                          >
-                            Delete User
-                          </button>
-                        </td>
+                    
                       </tr>
 
                       {expandedUserId === user.id && (
@@ -200,7 +174,7 @@ const AdminDashboard = () => {
                                         View
                                       </button>
                                       <button
-                                        onClick={() => setConfirmModal({ type: "task", id: task.id })}
+                                        onClick={() => handleDelete(task.id)}
                                         className="text-red-600 hover:underline text-xs"
                                       >
                                         Delete
@@ -256,43 +230,9 @@ const AdminDashboard = () => {
           </div>
         )}
 
-        {confirmModal && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div className="bg-white dark:bg-gray-800 rounded-lg p-6 w-[90%] max-w-sm shadow-lg text-center">
-              <h3 className="text-lg font-bold text-gray-800 dark:text-white mb-4">
-                Confirm Deletion
-              </h3>
-              <p className="text-gray-600 dark:text-gray-300 mb-6">
-                Are you sure you want to delete this {confirmModal.type === "user" ? "user" : "task"}? This action cannot be undone.
-              </p>
-              <div className="flex justify-center gap-4">
-                <button
-                  onClick={() => setConfirmModal(null)}
-                  className="px-4 py-2 bg-gray-300 hover:bg-gray-400 text-black rounded"
-                >
-                  Cancel
-                </button>
-                <button
-                  onClick={() => {
-                    if (confirmModal.type === "user") {
-                      handleDeleteUser(confirmModal.id);
-                    } else {
-                      handleDeleteTaskConfirmed(confirmModal.id);
-                    }
-                  }}
-                  className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded"
-                >
-                  Delete
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
-
       </div>
     </div>
   );
 };
 
-export default AdminDashboard;
-
+export default AllUsers;
