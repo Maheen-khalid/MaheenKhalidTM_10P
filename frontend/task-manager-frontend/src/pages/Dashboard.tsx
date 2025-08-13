@@ -213,7 +213,7 @@ const Dashboard = () => {
       <div className="flex flex-col w-full">
         <Topbar toggleTheme={() => setDarkMode(!darkMode)} darkMode={darkMode} toggleSidebar={() => setSidebarCollapsed(!sidebarCollapsed)} />
         <StatsBar stats={stats} />
-        <div className="flex flex-wrap justify-center gap-4 p-4 overflow-x-auto">
+        <div className="flex flex-wrap justify-center gap-2 p-4 overflow-x-auto">
           <Column title="To Do" tasks={tasks} status="todo" onAdd={handleAdd} onEdit={handleEdit} onDelete={handleDelete} />
           <Column title="In Progress" tasks={tasks} status="inProgress" onAdd={handleAdd} onEdit={handleEdit} onDelete={handleDelete} />
           <Column title="Done" tasks={tasks} status="done" onAdd={handleAdd} onEdit={handleEdit} onDelete={handleDelete} />
