@@ -13,10 +13,6 @@ C:\Users\Maheen Khalid\Desktop\10 pearls\MaheenKhalidTM_10P\backend\TaskManageme
 C:\Users\Maheen Khalid\Desktop\10 pearls\MaheenKhalidTM_10P\backend\TaskManagement\TaskManagement\bin\Debug\net8.0\TaskManagement.runtimeconfig.json
 C:\Users\Maheen Khalid\Desktop\10 pearls\MaheenKhalidTM_10P\backend\TaskManagement\TaskManagement\bin\Debug\net8.0\TaskManagement.dll
 C:\Users\Maheen Khalid\Desktop\10 pearls\MaheenKhalidTM_10P\backend\TaskManagement\TaskManagement\bin\Debug\net8.0\TaskManagement.pdb
-C:\Users\Maheen Khalid\Desktop\10 pearls\MaheenKhalidTM_10P\backend\TaskManagement\TaskManagement\bin\Debug\net8.0\EntityFramework.SqlServer.dll
-C:\Users\Maheen Khalid\Desktop\10 pearls\MaheenKhalidTM_10P\backend\TaskManagement\TaskManagement\bin\Debug\net8.0\EntityFramework.dll
-C:\Users\Maheen Khalid\Desktop\10 pearls\MaheenKhalidTM_10P\backend\TaskManagement\TaskManagement\bin\Debug\net8.0\Microsoft.AspNet.Identity.Core.dll
-C:\Users\Maheen Khalid\Desktop\10 pearls\MaheenKhalidTM_10P\backend\TaskManagement\TaskManagement\bin\Debug\net8.0\Microsoft.AspNet.Identity.EntityFramework.dll
 C:\Users\Maheen Khalid\Desktop\10 pearls\MaheenKhalidTM_10P\backend\TaskManagement\TaskManagement\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\Maheen Khalid\Desktop\10 pearls\MaheenKhalidTM_10P\backend\TaskManagement\TaskManagement\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 C:\Users\Maheen Khalid\Desktop\10 pearls\MaheenKhalidTM_10P\backend\TaskManagement\TaskManagement\bin\Debug\net8.0\Microsoft.AspNetCore.OpenApi.dll
