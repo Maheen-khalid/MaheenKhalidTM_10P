@@ -1,7 +1,35 @@
+# Visual Studio cache
 .vs/
 *.vsidx
-*.suo
-*.user
+
+# Build results
 bin/
 obj/
+[Bb]uild/
+[Bb]in/
+[Oo]bj/
 
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Test results
+[Tt]est[Rr]esult*/
+*.trx
+*.coverage
+*.coveragexml
+
+# NuGet packages
+*.nupkg
+packages/
+*.snupkg
+
+# Others
+_ReSharper*/
+*.resharper
+*.dbmdl
+*.bak
+*.log
+*.tmp

@@ -111,5 +111,35 @@ namespace TaskManagement.Controllers
 
             return Ok(tasks);
         }
+
+        [Authorize(Roles = "Admin")]
+        [HttpDelete("delete-user/{id}")]
+        public IActionResult DeleteUser(int id)
+        {
+            try
+            {
+                var user = _context.Users.FirstOrDefault(u => u.Id == id);
+                if (user == null)
+                {
+                    return NotFound(new { message = "User not found." });
+                }
+
+                // Optional: Prevent deletion of Admin accounts
+                if (user.IsAdmin)
+                {
+                    return BadRequest(new { message = "Admin accounts cannot be deleted." });
+                }
+
+                _context.Users.Remove(user);
+                _context.SaveChanges();
+
+                return Ok(new { message = "User deleted successfully." });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex); // Log it
+                return StatusCode(500, new { message = "An unexpected error occurred while deleting the user." });
+            }
+        }
     }
 }

@@ -10,8 +10,8 @@ import { Tooltip } from "react-tooltip";
 const Sidebar = ({ collapsed, activeItem, setActiveItem }: any) => {
   const menuItems = [
     { key: "dashboard", icon: <FiGrid />, label: "Dashboard" },
-    { key: "users", icon: <FiUsers />, label: "Users" },
-    { key: "settings", icon: <FiSettings />, label: "Settings" },
+    // { key: "users", icon: <FiUsers />, label: "Users" },
+    // { key: "settings", icon: <FiSettings />, label: "Settings" },
   ];
   return (
     <aside className={`h-full bg-gray-900 text-white ${collapsed ? "w-20" : "w-60"} p-4 transition-all duration-300`}>
@@ -191,18 +191,30 @@ const AdminDashboard = () => {
   }, [darkMode]);
 
   // API actions
-  const handleDeleteUser = async (userId: number) => {
-    try {
-      await axios.delete(`https://localhost:7088/api/Auth/delete-user/${userId}`, {
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-      });
-      setUsers((prev) => prev.filter((u) => u.id !== userId));
-      setTasks((prev) => prev.filter((t) => t.userId !== userId)); // remove their tasks from view
-      setConfirmModal(null);
-    } catch (err) {
-      console.error("User deletion failed", err);
-    }
-  };
+const handleDeleteUser = async (userId: number) => {
+  // Find the user in state
+  const userToDelete = users.find((u) => u.id === userId);
+
+  // If user is admin, block deletion
+  if (userToDelete?.isAdmin) {
+    alert("Admin accounts cannot be deleted.");
+    return;
+  }
+
+  try {
+    await axios.delete(`https://localhost:7088/api/Auth/delete-user/${userId}`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    });
+
+    // Remove user and their tasks from state
+    setUsers((prev) => prev.filter((u) => u.id !== userId));
+    setTasks((prev) => prev.filter((t) => t.userId !== userId));
+    setConfirmModal(null);
+  } catch (err) {
+    console.error("User deletion failed", err);
+  }
+};
+
 
   const handleDeleteTaskConfirmed = async (taskId: number) => {
     try {
