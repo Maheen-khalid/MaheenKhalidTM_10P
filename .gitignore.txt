@@ -7,7 +7,6 @@ bin/
 obj/
 [Bb]uild/
 [Bb]in/
-[Oo]bj/
 
 # User-specific files
 *.user
